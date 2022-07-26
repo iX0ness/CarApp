@@ -37,14 +37,12 @@ class LoaderViewController: UIViewController {
         ])
     }
     
-    func animateLogo() {
-        UIView.animate(withDuration: 0.5) { [weak self] in
-            self?.imageView.transform = CGAffineTransform.init(rotationAngle: .pi)
-            UIView.animate(withDuration: 0.5) { [weak self] in
-                self?.imageView.transform = CGAffineTransform.init(rotationAngle: 2 * .pi)
-            }
+    private func animateLogo() {
+        let animationDistance = view.frame.width + imageView.bounds.width
+        
+        imageView.rotate360 { [weak self] in
+            self?.imageView.moveRight(animationDistance, withDuration: 1.0, delay: 1.0)
         }
     }
-    
 }
 
