@@ -11,6 +11,14 @@ final class LoginViewController: UIViewController {
     
     private let viewModel: LoginViewModelType
     
+    private let loginButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Login", for: .normal)
+        button.addTarget(self, action: #selector(login), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -29,8 +37,35 @@ final class LoginViewController: UIViewController {
         view.backgroundColor = .lightGray
         setupUI()
     }
-    
-    private func setupUI() {
+        
+    @objc private func login() {
+        viewModel.login { _ in }
+    }
+}
+
+private extension LoginViewController {
+    func setupUI() {
         navigationController?.navigationBar.isHidden = true
+        constructHierarchy()
+        activateConstraints()
+    }
+    
+    func constructHierarchy() {
+        view.addSubview(loginButton)
+    }
+    
+    func activateConstraints() {
+        NSLayoutConstraint.activate([
+            loginButton.widthAnchor.constraint(equalTo: view.widthAnchor,multiplier: Padding.logoutButtonWidthMultiplier),
+            loginButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Padding.logoutButtonHeightMultiplier),
+            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loginButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: Padding.logoutButtonBottomAnchor),
+        ])
+    }
+    
+    enum Padding {
+        static let logoutButtonWidthMultiplier: CGFloat = 0.35
+        static let logoutButtonHeightMultiplier: CGFloat = 0.05
+        static let logoutButtonBottomAnchor: CGFloat = -16
     }
 }

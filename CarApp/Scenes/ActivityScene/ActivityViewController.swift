@@ -14,7 +14,7 @@ final class ActivityViewController: UIViewController {
     
     private let logoutButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Login", for: .normal)
+        button.setTitle("Logout", for: .normal)
         button.addTarget(self, action: #selector(logout), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -59,7 +59,7 @@ private extension ActivityViewController {
             logoutButton.widthAnchor.constraint(equalTo: view.widthAnchor,multiplier: Padding.logoutButtonWidthMultiplier),
             logoutButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Padding.logoutButtonHeightMultiplier),
             logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Padding.logoutButtonBottomAnchor),
+            logoutButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: Padding.logoutButtonBottomAnchor),
         ])
     }
     

@@ -8,13 +8,14 @@
 import Foundation
 
 protocol LoginViewModelType {
-    func login(_ completion: Result<Void, Error>)
+    func login(_ completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 final class LoginViewModel: LoginViewModelType {
-    func login(_ completion: Result<Void, Error>) {}
     
     deinit {
         print("\(LoginViewModel.self) deinitialized")
     }
+    
+    func login(_ completion: @escaping (Result<Void, Error>) -> Void) {}
 }
