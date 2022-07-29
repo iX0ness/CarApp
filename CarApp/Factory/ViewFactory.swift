@@ -15,6 +15,10 @@ final class ViewFactory {
     func makeLoginViewController() -> LoginViewController {
         return LoginViewController(viewModel: makeLoginViewModel())
     }
+    
+    func makeActivityViewController() -> ActivityViewController {
+        return ActivityViewController(viewModel: makeActivityViewModel())
+    }
 }
 
 private extension ViewFactory {
@@ -23,6 +27,10 @@ private extension ViewFactory {
     }
     
     func makeLoginViewModel() -> LoginViewModel {
+        .init()
+    }
+    
+    func makeActivityViewModel() -> ActivityViewModel {
         .init()
     }
 }

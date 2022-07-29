@@ -13,4 +13,9 @@ final class CoordinatorFactory {
         let coordinator = AuthCoordinator()
         return coordinator
     }
+    
+    func makeMainCoordinator() -> MainCoordinator {
+        let coordinator = MainCoordinator()
+        return coordinator
+    }
 }

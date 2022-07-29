@@ -10,7 +10,7 @@ import UIKit
 final class LoaderViewController: UIViewController {
     
     private let viewModel: LoaderViewModelType
-    weak var coordinator: LoaderDelegate?
+    weak var coordinator: LoaderViewDelegate?
     
     init(viewModel: LoaderViewModelType) {
         self.viewModel = viewModel

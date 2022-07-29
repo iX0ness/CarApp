@@ -8,7 +8,7 @@
 import UIKit
 
 
-protocol LoaderDelegate: AnyObject {
+protocol LoaderViewDelegate: AnyObject {
     func runAuthFlow()
     func runMainFlow()
 }
@@ -40,7 +40,7 @@ final class AppCoordinator: Coordinable {
     
 }
 
-extension AppCoordinator: LoaderDelegate {
+extension AppCoordinator: LoaderViewDelegate {
     func runAuthFlow() {
         let coordinator = coordinatorFactory.makeAuthCoordinator()
         coordinator.presenter = presenter
@@ -54,7 +54,15 @@ extension AppCoordinator: LoaderDelegate {
     }
     
     func runMainFlow() {
+        let coordinator = coordinatorFactory.makeMainCoordinator()
+        coordinator.presenter = presenter
+        childCoordinators.append(coordinator)
         
+        coordinator.didFinish = { [weak coordinator] in
+            self.childCoordinators.removeAll(where: { $0 === coordinator })
+        }
+        
+        coordinator.start()
     }
     
     

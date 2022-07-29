@@ -26,6 +26,9 @@
 		96DE23DD2893D8820026458C /* LoaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23DC2893D8820026458C /* LoaderViewModel.swift */; };
 		96DE23E02893DF650026458C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23DF2893DF650026458C /* UIViewController+Extension.swift */; };
 		96DE23E22893E64F0026458C /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23E12893E64F0026458C /* CoordinatorFactory.swift */; };
+		96DE23E42893F62B0026458C /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23E32893F62B0026458C /* MainCoordinator.swift */; };
+		96DE23E72893F86C0026458C /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23E62893F86C0026458C /* ActivityViewController.swift */; };
+		96DE23E92893F95F0026458C /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23E82893F95F0026458C /* ActivityViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +52,9 @@
 		96DE23DC2893D8820026458C /* LoaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderViewModel.swift; sourceTree = "<group>"; };
 		96DE23DF2893DF650026458C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		96DE23E12893E64F0026458C /* CoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
+		96DE23E32893F62B0026458C /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		96DE23E62893F86C0026458C /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		96DE23E82893F95F0026458C /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +133,7 @@
 		22C64BCC28905BDE004B48E6 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				96DE23E52893F67B0026458C /* ActivityScene */,
 				96DE23D72893D7A30026458C /* LoginScene */,
 				22C64BCD28905BE8004B48E6 /* LoaderScene */,
 			);
@@ -147,6 +154,7 @@
 			children = (
 				22E51FDC2880AAE700EC40E8 /* AppCoordinator.swift */,
 				96DE23D52893D77F0026458C /* AuthCoordinator.swift */,
+				96DE23E32893F62B0026458C /* MainCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -167,6 +175,15 @@
 				96DE23DA2893D7DF0026458C /* LoginViewModel.swift */,
 			);
 			path = LoginScene;
+			sourceTree = "<group>";
+		};
+		96DE23E52893F67B0026458C /* ActivityScene */ = {
+			isa = PBXGroup;
+			children = (
+				96DE23E62893F86C0026458C /* ActivityViewController.swift */,
+				96DE23E82893F95F0026458C /* ActivityViewModel.swift */,
+			);
+			path = ActivityScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96DE23E42893F62B0026458C /* MainCoordinator.swift in Sources */,
 				96DE23D92893D7BA0026458C /* LoginViewController.swift in Sources */,
 				96DE23DD2893D8820026458C /* LoaderViewModel.swift in Sources */,
 				22BA342E2879B9380091B43C /* Router.swift in Sources */,
@@ -254,9 +272,11 @@
 				22BA34102879A7F80091B43C /* LoaderViewController.swift in Sources */,
 				22E51FE02883316E00EC40E8 /* ViewFactory.swift in Sources */,
 				22E51FDD2880AAE700EC40E8 /* AppCoordinator.swift in Sources */,
+				96DE23E92893F95F0026458C /* ActivityViewModel.swift in Sources */,
 				96DE23D62893D77F0026458C /* AuthCoordinator.swift in Sources */,
 				96DE23DB2893D7DF0026458C /* LoginViewModel.swift in Sources */,
 				22BA340C2879A7F80091B43C /* AppDelegate.swift in Sources */,
+				96DE23E72893F86C0026458C /* ActivityViewController.swift in Sources */,
 				22C64BCB28905AF1004B48E6 /* UIImage+Extension.swift in Sources */,
 				22BA340E2879A7F80091B43C /* SceneDelegate.swift in Sources */,
 				22BA34322879BD260091B43C /* Constants.swift in Sources */,
