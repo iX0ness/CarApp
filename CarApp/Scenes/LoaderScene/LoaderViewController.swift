@@ -31,38 +31,27 @@ final class LoaderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        placeLogo()
+        setupLogo()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        viewModel.getAuthStatus { [weak self] isAuthorized in
-//            if isAuthorized {
-//                self?.coordinator?.runMainFlow()
-//            } else {
-//                self?.coordinator?.runAuthFlow()
-//            }
-//
-//        }
-        
-                rotateLogo { [weak self] in
-                    self?.checkAuthorizationStatus(
-                        onAuthorized: {
-                            self?.moveLogo()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                self?.removeLogo()
-                                self?.coordinator?.runMainFlow()
-                            }
-                        },
-                        onUnAuthrized: {
-                            self?.coordinator?.runAuthFlow()
-                        })
+        rotateLogo { [weak self] in
+            self?.checkAuthorizationStatus(
+                onAuthorized: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self?.coordinator?.runMainFlow()
+                    }
+                    
+                },
+                onUnAuthrized: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self?.coordinator?.runAuthFlow()
+                    }
                 }
+            )
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -70,7 +59,7 @@ final class LoaderViewController: UIViewController {
         viewModel.removeStateListener()
     }
     
-    private func placeLogo() {
+    private func setupLogo() {
         view.addSubview(imageView)
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -80,30 +69,16 @@ final class LoaderViewController: UIViewController {
         ])
     }
     
-    private func removeLogo() {
-        imageView.removeFromSuperview()
-    }
-    
-    
-    
     func rotateLogo(_ completion: @escaping () -> Void) {
         imageView.rotate360(completion)
     }
     
-    func moveLogo() {
-        let animationDistance = view.frame.width + imageView.bounds.width
-        
-        imageView.moveRight(animationDistance, withDuration: 1.0)
-    }
-    
     func checkAuthorizationStatus( onAuthorized: @escaping () -> Void, onUnAuthrized: @escaping () -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            self?.viewModel.getAuthStatus { isAuthrozed in
-                if isAuthrozed {
-                    onAuthorized()
-                } else {
-                    onUnAuthrized()
-                }
+        viewModel.getAuthStatus { isAuthrozed in
+            if isAuthrozed {
+                onAuthorized()
+            } else {
+                onUnAuthrized()
             }
         }
     }
