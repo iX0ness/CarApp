@@ -19,6 +19,7 @@
 		22C64BCB28905AF1004B48E6 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C64BCA28905AF1004B48E6 /* UIImage+Extension.swift */; };
 		22E51FDD2880AAE700EC40E8 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E51FDC2880AAE700EC40E8 /* AppCoordinator.swift */; };
 		22E51FE02883316E00EC40E8 /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E51FDF2883316E00EC40E8 /* ViewFactory.swift */; };
+		96DE23D42893CE780026458C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 96DE23D32893CE780026458C /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96DE23D42893CE780026458C /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +160,7 @@
 			);
 			name = CarApp;
 			packageProductDependencies = (
+				96DE23D32893CE780026458C /* FirebaseAuth */,
 			);
 			productName = CarApp;
 			productReference = 22BA34082879A7F80091B43C /* CarApp.app */;
@@ -188,6 +191,7 @@
 			);
 			mainGroup = 22BA33FF2879A7F80091B43C;
 			packageReferences = (
+				96DE23D22893CE780026458C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 22BA34092879A7F80091B43C /* Products */;
 			projectDirPath = "";
@@ -423,6 +427,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		96DE23D22893CE780026458C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		96DE23D32893CE780026458C /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96DE23D22893CE780026458C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 22BA34002879A7F80091B43C /* Project object */;
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoaderViewController: UIViewController {
+final class LoaderViewController: UIViewController {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: Constants.Images.launch))
