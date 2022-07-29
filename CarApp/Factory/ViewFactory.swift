@@ -19,6 +19,10 @@ final class ViewFactory {
     func makeActivityViewController(logoutService: LogoutServiceType) -> ActivityViewController {
         return ActivityViewController(viewModel: makeActivityViewModel(logoutService: logoutService))
     }
+    
+    func makeActivityModifyViewcontroller() -> ModifyActivityViewController {
+        return ModifyActivityViewController(viewModel: makeModifyActivityViewModel())
+    }
 }
 
 private extension ViewFactory {
@@ -32,5 +36,9 @@ private extension ViewFactory {
     
     func makeActivityViewModel(logoutService: LogoutServiceType) -> ActivityViewModel {
         .init(logoutService: logoutService)
+    }
+    
+    func makeModifyActivityViewModel() -> ModifyActivityViewModel {
+        .init()
     }
 }

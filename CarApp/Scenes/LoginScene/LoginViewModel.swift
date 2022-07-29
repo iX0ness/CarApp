@@ -26,4 +26,5 @@ final class LoginViewModel: LoginViewModelType {
     func login(_ completion: @escaping (Result<Void, AuthorizationError>) -> Void) {
         authorizationService.login(completion: completion)
     }
+    
 }

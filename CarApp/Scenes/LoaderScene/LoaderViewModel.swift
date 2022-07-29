@@ -19,16 +19,7 @@ final class LoaderViewModel: LoaderViewModelType {
     
     func getAuthStatus(_ completion: @escaping (Bool) -> Void) {
         listenerHander = Auth.auth().addStateDidChangeListener { authResult, user in
-            
-            if user != nil {
-                print(authResult.currentUser)
-                completion(true)
-                return
-            } else {
-                print(authResult.currentUser)
-                completion(false)
-                return
-            }
+            user == nil ? completion(false) : completion(true)
         }
     }
     

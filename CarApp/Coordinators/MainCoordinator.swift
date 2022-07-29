@@ -13,10 +13,11 @@ protocol ActivityViewDelegate: AnyObject {
 }
 
 final class MainCoordinator: Coordinable {
+    
+    weak var parent: AppCoordinator?
     var presenter: UINavigationController?
     var didFinish: CoordinatorHandler?
     
-    weak var parent: AppCoordinator?
     private let viewFactory: ViewFactory
     private let logoutService: LogoutServiceType
     
@@ -38,7 +39,10 @@ final class MainCoordinator: Coordinable {
 }
 
 extension MainCoordinator: ActivityViewDelegate {
-    func showActivityModifyView() {}
+    func showActivityModifyView() {
+        let viewController = viewFactory.makeActivityModifyViewcontroller()
+        push(viewController, animated: true)
+    }
     
     func logout() {
         didFinish?()

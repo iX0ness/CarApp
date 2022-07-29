@@ -69,11 +69,11 @@ final class LoaderViewController: UIViewController {
         ])
     }
     
-    func rotateLogo(_ completion: @escaping () -> Void) {
+    private func rotateLogo(_ completion: @escaping () -> Void) {
         imageView.rotate360(completion)
     }
     
-    func checkAuthorizationStatus( onAuthorized: @escaping () -> Void, onUnAuthrized: @escaping () -> Void) {
+    private func checkAuthorizationStatus( onAuthorized: @escaping () -> Void, onUnAuthrized: @escaping () -> Void) {
         viewModel.getAuthStatus { isAuthrozed in
             if isAuthrozed {
                 onAuthorized()
@@ -82,5 +82,6 @@ final class LoaderViewController: UIViewController {
             }
         }
     }
+    
 }
 

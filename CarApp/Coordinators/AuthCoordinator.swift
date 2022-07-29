@@ -12,10 +12,11 @@ protocol LoginViewDelegate: AnyObject {
 }
 
 final class AuthCoordinator: Coordinable {
+    
+    weak var parent: AppCoordinator?
     var presenter: UINavigationController?
     var didFinish: CoordinatorHandler?
     
-    weak var parent: AppCoordinator?
     private let viewFactory: ViewFactory
     private let authorizationService: AuthorizationServiceType
     

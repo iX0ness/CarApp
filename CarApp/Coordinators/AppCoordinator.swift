@@ -15,13 +15,13 @@ protocol LoaderViewDelegate: AnyObject {
 
 final class AppCoordinator: Coordinable {
     
+    var window: UIWindow?
+    
     var presenter: UINavigationController?
     var didFinish: CoordinatorHandler?
     var childCoordinators: [Coordinable] = []
     private let viewFactory: ViewFactory
     private let coordinatorFactory: CoordinatorFactory
-    
-    var window: UIWindow?
     
     init(window: UIWindow?) {
         self.window = window
@@ -41,6 +41,7 @@ final class AppCoordinator: Coordinable {
 }
 
 extension AppCoordinator: LoaderViewDelegate {
+    
     func runAuthFlow() {
         let coordinator = coordinatorFactory.makeAuthCoordinator()
         coordinator.presenter = presenter
@@ -66,6 +67,5 @@ extension AppCoordinator: LoaderViewDelegate {
         
         coordinator.start()
     }
-    
     
 }

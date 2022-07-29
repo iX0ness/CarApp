@@ -26,4 +26,5 @@ final class ActivityViewModel: ActivityViewModelType {
     func logout(completion: @escaping (Result<Void, AuthorizationError>) -> Void) {
         logoutService.logout(completion: completion)
     }
+    
 }

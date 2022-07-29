@@ -16,6 +16,16 @@ final class ActivityViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Logout", for: .normal)
         button.addTarget(self, action: #selector(logout), for: .touchUpInside)
+        button.backgroundColor = .lightGray
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let activityModifyViewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Modify activity view", for: .normal)
+        button.addTarget(self, action: #selector(openModifyActivityView), for: .touchUpInside)
+        button.backgroundColor = .lightGray
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -35,8 +45,13 @@ final class ActivityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .white
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
     }
     
     @objc private func logout() {
@@ -50,17 +65,21 @@ final class ActivityViewController: UIViewController {
         }
     }
     
+    @objc private func openModifyActivityView() {
+        self.coordinator?.showActivityModifyView()
+    }
+    
 }
 
 private extension ActivityViewController {
     func setupUI() {
-        navigationController?.navigationBar.isHidden = true
         constructHierarchy()
         activateConstraints()
     }
     
     func constructHierarchy() {
         view.addSubview(logoutButton)
+        view.addSubview(activityModifyViewButton)
     }
     
     func activateConstraints() {
@@ -70,10 +89,17 @@ private extension ActivityViewController {
             logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoutButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: Padding.logoutButtonBottomAnchor),
         ])
+        
+        NSLayoutConstraint.activate([
+            activityModifyViewButton.widthAnchor.constraint(equalTo: view.widthAnchor,multiplier: Padding.logoutButtonWidthMultiplier),
+            activityModifyViewButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Padding.logoutButtonHeightMultiplier),
+            activityModifyViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityModifyViewButton.bottomAnchor.constraint(equalTo: logoutButton.topAnchor, constant: Padding.logoutButtonBottomAnchor),
+        ])
     }
     
     enum Padding {
-        static let logoutButtonWidthMultiplier: CGFloat = 0.35
+        static let logoutButtonWidthMultiplier: CGFloat = 0.5
         static let logoutButtonHeightMultiplier: CGFloat = 0.05
         static let logoutButtonBottomAnchor: CGFloat = -16
     }
