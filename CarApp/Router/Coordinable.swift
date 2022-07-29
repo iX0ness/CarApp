@@ -10,7 +10,7 @@ import Foundation
 typealias CoordinatorHandler = () -> ()
 
 protocol Coordinable: AnyObject, Router {
-    var flowCompletion: CoordinatorHandler? { get }
+    var didFinish: CoordinatorHandler? { get }
     func start()
 }
 

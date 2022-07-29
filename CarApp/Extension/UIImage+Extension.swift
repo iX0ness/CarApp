@@ -19,8 +19,13 @@ extension UIImageView {
         }
     }
     
-    func moveRight(_ value: CGFloat, withDuration: TimeInterval, delay: CGFloat) {
-        UIView.animate(withDuration: withDuration, delay: delay) { [weak self] in
+    func moveRight(
+        _ value: CGFloat,
+        withDuration: TimeInterval,
+        delay: CGFloat? = nil,
+        _ completion: (() -> Void)? = nil
+    ) {
+        UIView.animate(withDuration: withDuration, delay: delay ?? 0) { [weak self] in
             self?.frame.origin.x += value / 2
         }
     }
