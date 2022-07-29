@@ -13,4 +13,8 @@ protocol LoginViewModelType {
 
 final class LoginViewModel: LoginViewModelType {
     func login(_ completion: Result<Void, Error>) {}
+    
+    deinit {
+        print("\(LoginViewModel.self) deinitialized")
+    }
 }

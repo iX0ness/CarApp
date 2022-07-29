@@ -18,6 +18,10 @@ final class AuthCoordinator: Coordinable {
         viewFactory = ViewFactory()
     }
     
+    deinit {
+        print("\(LoginViewModel.self) deinitialized")
+    }
+    
     func start() {
         let viewController = viewFactory.makeLoginViewController()
         push(viewController, animated: true)
