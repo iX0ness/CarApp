@@ -10,12 +10,31 @@ import FirebaseAuth
 
 protocol LoaderViewModelType: AnyObject {
     func getAuthStatus(_ completion: @escaping (Bool) -> Void)
+    func removeStateListener()
 }
 
 final class LoaderViewModel: LoaderViewModelType {
+    
+    private var listenerHander: AuthStateDidChangeListenerHandle?
+    
     func getAuthStatus(_ completion: @escaping (Bool) -> Void) {
-        Auth.auth().addStateDidChangeListener { _, user in
-            user == nil ? completion(false) : completion(true)
+        listenerHander = Auth.auth().addStateDidChangeListener { authResult, user in
+            
+            if user != nil {
+                print(authResult.currentUser)
+                completion(true)
+                return
+            } else {
+                print(authResult.currentUser)
+                completion(false)
+                return
+            }
+        }
+    }
+    
+    func removeStateListener() {
+        if let listener = listenerHander {
+            Auth.auth().removeStateDidChangeListener(listener)
         }
     }
 }

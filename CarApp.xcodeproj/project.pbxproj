@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		22360A402880A7AA008FBA88 /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22360A3F2880A7AA008FBA88 /* AuthorizationService.swift */; };
 		22BA340C2879A7F80091B43C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA340B2879A7F80091B43C /* AppDelegate.swift */; };
 		22BA340E2879A7F80091B43C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA340D2879A7F80091B43C /* SceneDelegate.swift */; };
 		22BA34102879A7F80091B43C /* LoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA340F2879A7F80091B43C /* LoaderViewController.swift */; };
@@ -28,10 +27,11 @@
 		96DE23E42893F62B0026458C /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23E32893F62B0026458C /* MainCoordinator.swift */; };
 		96DE23E72893F86C0026458C /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23E62893F86C0026458C /* ActivityViewController.swift */; };
 		96DE23E92893F95F0026458C /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23E82893F95F0026458C /* ActivityViewModel.swift */; };
+		96DE23EC2894008D0026458C /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23EB2894008D0026458C /* AuthorizationService.swift */; };
+		96DE23F0289404CD0026458C /* LogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23EF289404CD0026458C /* LogoutService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		22360A3F2880A7AA008FBA88 /* AuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationService.swift; sourceTree = "<group>"; };
 		22BA34082879A7F80091B43C /* CarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BA340B2879A7F80091B43C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22BA340D2879A7F80091B43C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +53,8 @@
 		96DE23E32893F62B0026458C /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		96DE23E62893F86C0026458C /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		96DE23E82893F95F0026458C /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
+		96DE23EB2894008D0026458C /* AuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationService.swift; sourceTree = "<group>"; };
+		96DE23EF289404CD0026458C /* LogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,14 +69,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		22360A3E2880A794008FBA88 /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-				22360A3F2880A7AA008FBA88 /* AuthorizationService.swift */,
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
 		22BA33FF2879A7F80091B43C = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +88,7 @@
 		22BA340A2879A7F80091B43C /* CarApp */ = {
 			isa = PBXGroup;
 			children = (
+				96DE23EA2894007E0026458C /* Services */,
 				22C64BCC28905BDE004B48E6 /* Scenes */,
 				22C64BC928905AE4004B48E6 /* Extension */,
 				22E51FDE2883315D00EC40E8 /* Factory */,
@@ -112,7 +107,6 @@
 		22BA342C2879B9250091B43C /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				22360A3E2880A794008FBA88 /* Networking */,
 				22BA342D2879B9380091B43C /* Router.swift */,
 				22BA342F2879BA740091B43C /* Coordinable.swift */,
 			);
@@ -181,6 +175,15 @@
 				96DE23E82893F95F0026458C /* ActivityViewModel.swift */,
 			);
 			path = ActivityScene;
+			sourceTree = "<group>";
+		};
+		96DE23EA2894007E0026458C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				96DE23EB2894008D0026458C /* AuthorizationService.swift */,
+				96DE23EF289404CD0026458C /* LogoutService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,12 +266,13 @@
 				96DE23D92893D7BA0026458C /* LoginViewController.swift in Sources */,
 				96DE23DD2893D8820026458C /* LoaderViewModel.swift in Sources */,
 				22BA342E2879B9380091B43C /* Router.swift in Sources */,
-				22360A402880A7AA008FBA88 /* AuthorizationService.swift in Sources */,
 				22BA34302879BA740091B43C /* Coordinable.swift in Sources */,
 				22BA34102879A7F80091B43C /* LoaderViewController.swift in Sources */,
 				22E51FE02883316E00EC40E8 /* ViewFactory.swift in Sources */,
+				96DE23EC2894008D0026458C /* AuthorizationService.swift in Sources */,
 				22E51FDD2880AAE700EC40E8 /* AppCoordinator.swift in Sources */,
 				96DE23E92893F95F0026458C /* ActivityViewModel.swift in Sources */,
+				96DE23F0289404CD0026458C /* LogoutService.swift in Sources */,
 				96DE23D62893D77F0026458C /* AuthCoordinator.swift in Sources */,
 				96DE23DB2893D7DF0026458C /* LoginViewModel.swift in Sources */,
 				22BA340C2879A7F80091B43C /* AppDelegate.swift in Sources */,

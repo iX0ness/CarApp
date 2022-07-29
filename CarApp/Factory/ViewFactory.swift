@@ -12,12 +12,12 @@ final class ViewFactory {
         return LoaderViewController(viewModel: makeLoaderViewModel())
     }
     
-    func makeLoginViewController() -> LoginViewController {
-        return LoginViewController(viewModel: makeLoginViewModel())
+    func makeLoginViewController(authorizationService: AuthorizationServiceType) -> LoginViewController {
+        return LoginViewController(viewModel: makeLoginViewModel(authorizationService: authorizationService))
     }
     
-    func makeActivityViewController() -> ActivityViewController {
-        return ActivityViewController(viewModel: makeActivityViewModel())
+    func makeActivityViewController(logoutService: LogoutServiceType) -> ActivityViewController {
+        return ActivityViewController(viewModel: makeActivityViewModel(logoutService: logoutService))
     }
 }
 
@@ -26,11 +26,11 @@ private extension ViewFactory {
         .init()
     }
     
-    func makeLoginViewModel() -> LoginViewModel {
-        .init()
+    func makeLoginViewModel(authorizationService: AuthorizationServiceType) -> LoginViewModel {
+        .init(authorizationService: authorizationService)
     }
     
-    func makeActivityViewModel() -> ActivityViewModel {
-        .init()
+    func makeActivityViewModel(logoutService: LogoutServiceType) -> ActivityViewModel {
+        .init(logoutService: logoutService)
     }
 }

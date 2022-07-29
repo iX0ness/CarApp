@@ -35,17 +35,26 @@ final class ActivityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .lightGray
         setupUI()
     }
     
     @objc private func logout() {
-        viewModel.logout()
+        viewModel.logout { [weak self] result in
+            switch result {
+                case .success:
+                    self?.coordinator?.logout()
+                case .failure(let error):
+                    print(error)
+            }
+        }
     }
     
 }
 
 private extension ActivityViewController {
     func setupUI() {
+        navigationController?.navigationBar.isHidden = true
         constructHierarchy()
         activateConstraints()
     }

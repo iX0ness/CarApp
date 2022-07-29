@@ -8,14 +8,22 @@
 import Foundation
 
 protocol LoginViewModelType {
-    func login(_ completion: @escaping (Result<Void, Error>) -> Void)
+    func login(_ completion: @escaping (Result<Void, AuthorizationError>) -> Void)
 }
 
 final class LoginViewModel: LoginViewModelType {
+    
+    private let authorizationService: AuthorizationServiceType
+    
+    init(authorizationService: AuthorizationServiceType) {
+        self.authorizationService = authorizationService
+    }
     
     deinit {
         print("\(LoginViewModel.self) deinitialized")
     }
     
-    func login(_ completion: @escaping (Result<Void, Error>) -> Void) {}
+    func login(_ completion: @escaping (Result<Void, AuthorizationError>) -> Void) {
+        authorizationService.login(completion: completion)
+    }
 }

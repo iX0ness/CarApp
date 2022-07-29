@@ -7,24 +7,38 @@
 
 import UIKit
 
+protocol LoginViewDelegate: AnyObject {
+    func didLogin()
+}
+
 final class AuthCoordinator: Coordinable {
     var presenter: UINavigationController?
     var didFinish: CoordinatorHandler?
     
     weak var parent: AppCoordinator?
     private let viewFactory: ViewFactory
+    private let authorizationService: AuthorizationServiceType
     
     init() {
         viewFactory = ViewFactory()
+        authorizationService = AuthorizationService()
     }
     
     deinit {
-        print("\(LoginViewModel.self) deinitialized")
+        print("\(AuthCoordinator.self) deinitialized")
     }
     
     func start() {
-        let viewController = viewFactory.makeLoginViewController()
+        let viewController = viewFactory.makeLoginViewController(authorizationService: authorizationService)
+        viewController.coordinator = self
         push(viewController, animated: true)
     }
     
+}
+
+extension AuthCoordinator: LoginViewDelegate {
+    func didLogin() {
+        didFinish?()
+        presenter?.popToRootViewController(animated: false)
+    }
 }

@@ -9,6 +9,7 @@ import UIKit
 
 final class LoginViewController: UIViewController {
     
+    weak var coordinator: LoginViewDelegate?
     private let viewModel: LoginViewModelType
     
     private let loginButton: UIButton = {
@@ -39,7 +40,14 @@ final class LoginViewController: UIViewController {
     }
         
     @objc private func login() {
-        viewModel.login { _ in }
+        viewModel.login { [weak self] result in
+            switch result {
+                case .success:
+                    self?.coordinator?.didLogin()
+                case .failure(let error):
+                    print("error")
+            }
+        }
     }
 }
 

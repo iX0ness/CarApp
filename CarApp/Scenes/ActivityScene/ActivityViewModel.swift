@@ -8,14 +8,22 @@
 import Foundation
 
 protocol ActivityViewModelType: AnyObject {
-    func logout()
+    func logout(completion: @escaping (Result<Void, AuthorizationError>) -> Void)
 }
 
 final class ActivityViewModel: ActivityViewModelType {
+    
+    private let logoutService: LogoutServiceType
+    
+    init(logoutService: LogoutServiceType) {
+        self.logoutService = logoutService
+    }
     
     deinit {
         print("\(ActivityViewModel.self) deinitialized")
     }
     
-    func logout() {}
+    func logout(completion: @escaping (Result<Void, AuthorizationError>) -> Void) {
+        logoutService.logout(completion: completion)
+    }
 }

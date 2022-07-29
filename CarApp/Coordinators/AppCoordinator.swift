@@ -44,10 +44,11 @@ extension AppCoordinator: LoaderViewDelegate {
     func runAuthFlow() {
         let coordinator = coordinatorFactory.makeAuthCoordinator()
         coordinator.presenter = presenter
+        coordinator.parent = self
         childCoordinators.append(coordinator)
         
-        coordinator.didFinish = { [weak coordinator] in
-            self.childCoordinators.removeAll(where: { $0 === coordinator })
+        coordinator.didFinish = { [weak coordinator, weak self] in
+            self?.childCoordinators.removeAll(where: { $0 === coordinator })
         }
         
         coordinator.start()
@@ -56,10 +57,11 @@ extension AppCoordinator: LoaderViewDelegate {
     func runMainFlow() {
         let coordinator = coordinatorFactory.makeMainCoordinator()
         coordinator.presenter = presenter
+        coordinator.parent = self
         childCoordinators.append(coordinator)
         
-        coordinator.didFinish = { [weak coordinator] in
-            self.childCoordinators.removeAll(where: { $0 === coordinator })
+        coordinator.didFinish = { [weak coordinator, weak self] in
+            self?.childCoordinators.removeAll(where: { $0 === coordinator })
         }
         
         coordinator.start()
