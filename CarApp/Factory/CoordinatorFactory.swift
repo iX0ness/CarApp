@@ -10,12 +10,10 @@ import UIKit
 
 final class CoordinatorFactory {
     func makeAuthCoordinator() -> AuthCoordinator {
-        let coordinator = AuthCoordinator()
-        return coordinator
+        .init()
     }
     
     func makeMainCoordinator() -> MainCoordinator {
-        let coordinator = MainCoordinator()
-        return coordinator
+        .init()
     }
 }

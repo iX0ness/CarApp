@@ -8,9 +8,14 @@
 import Foundation
 
 protocol ActivityViewModelType: AnyObject {
-    
+    func logout()
 }
 
 final class ActivityViewModel: ActivityViewModelType {
     
+    deinit {
+        print("\(ActivityViewModel.self) deinitialized")
+    }
+    
+    func logout() {}
 }

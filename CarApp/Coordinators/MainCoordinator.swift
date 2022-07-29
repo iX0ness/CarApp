@@ -15,10 +15,18 @@ final class MainCoordinator: Coordinable {
     var presenter: UINavigationController?
     var didFinish: CoordinatorHandler?
     
+    
+    
     weak var parent: AppCoordinator?
+    private let viewFactory: ViewFactory
+    
+    init() {
+        viewFactory = ViewFactory()
+    }
     
     func start() {
-        
+        let viewController = viewFactory.makeActivityViewController()
+        push(viewController, animated: true)
     }
 
 }

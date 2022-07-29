@@ -24,7 +24,6 @@
 		96DE23D92893D7BA0026458C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23D82893D7BA0026458C /* LoginViewController.swift */; };
 		96DE23DB2893D7DF0026458C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23DA2893D7DF0026458C /* LoginViewModel.swift */; };
 		96DE23DD2893D8820026458C /* LoaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23DC2893D8820026458C /* LoaderViewModel.swift */; };
-		96DE23E02893DF650026458C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23DF2893DF650026458C /* UIViewController+Extension.swift */; };
 		96DE23E22893E64F0026458C /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23E12893E64F0026458C /* CoordinatorFactory.swift */; };
 		96DE23E42893F62B0026458C /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23E32893F62B0026458C /* MainCoordinator.swift */; };
 		96DE23E72893F86C0026458C /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE23E62893F86C0026458C /* ActivityViewController.swift */; };
@@ -50,7 +49,6 @@
 		96DE23D82893D7BA0026458C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		96DE23DA2893D7DF0026458C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		96DE23DC2893D8820026458C /* LoaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderViewModel.swift; sourceTree = "<group>"; };
-		96DE23DF2893DF650026458C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		96DE23E12893E64F0026458C /* CoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
 		96DE23E32893F62B0026458C /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		96DE23E62893F86C0026458C /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				22C64BCA28905AF1004B48E6 /* UIImage+Extension.swift */,
-				96DE23DF2893DF650026458C /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -266,7 +263,6 @@
 				96DE23D92893D7BA0026458C /* LoginViewController.swift in Sources */,
 				96DE23DD2893D8820026458C /* LoaderViewModel.swift in Sources */,
 				22BA342E2879B9380091B43C /* Router.swift in Sources */,
-				96DE23E02893DF650026458C /* UIViewController+Extension.swift in Sources */,
 				22360A402880A7AA008FBA88 /* AuthorizationService.swift in Sources */,
 				22BA34302879BA740091B43C /* Coordinable.swift in Sources */,
 				22BA34102879A7F80091B43C /* LoaderViewController.swift in Sources */,
