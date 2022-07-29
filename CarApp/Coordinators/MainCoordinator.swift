@@ -7,8 +7,8 @@
 
 import UIKit
 
-protocol ActivityViewDelegate: AnyObject {
-    func showActivityModifyView()
+protocol CarViewDelegate: AnyObject {
+    func showKilometrageCorrectorView()
     func logout()
 }
 
@@ -31,16 +31,16 @@ final class MainCoordinator: Coordinable {
     }
     
     func start() {
-        let viewController = viewFactory.makeActivityViewController(logoutService: logoutService)
+        let viewController = viewFactory.makeCarViewController(logoutService: logoutService)
         viewController.coordinator = self
         push(viewController, animated: true)
     }
 
 }
 
-extension MainCoordinator: ActivityViewDelegate {
-    func showActivityModifyView() {
-        let viewController = viewFactory.makeActivityModifyViewcontroller()
+extension MainCoordinator: CarViewDelegate {
+    func showKilometrageCorrectorView() {
+        let viewController = viewFactory.makeKilometrageCorrectorViewcontroller()
         push(viewController, animated: true)
     }
     

@@ -1,5 +1,5 @@
 //
-//  ModifyActivityViewController.swift
+//  KilometrageCorrectorViewController.swift
 //  CarApp
 //
 //  Created by Mykhaylo Levchuk on 29/07/2022.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class ModifyActivityViewController: UIViewController {
+final class KilometrageCorrectorViewController: UIViewController {
     
-    private let viewModel: ModifyActivityViewModelType
+    private let viewModel: KilometrageCorrectorViewModelType
     
-    init(viewModel: ModifyActivityViewModelType) {
+    init(viewModel: KilometrageCorrectorViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

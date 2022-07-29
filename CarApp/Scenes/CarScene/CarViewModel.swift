@@ -1,5 +1,5 @@
 //
-//  ActivityViewModel.swift
+//  CarViewModel.swift
 //  CarApp
 //
 //  Created by Mykhaylo Levchuk on 29/07/2022.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol ActivityViewModelType: AnyObject {
+protocol CarViewModelType: AnyObject {
     func logout(completion: @escaping (Result<Void, AuthorizationError>) -> Void)
 }
 
-final class ActivityViewModel: ActivityViewModelType {
+final class CarViewModel: CarViewModelType {
     
     private let logoutService: LogoutServiceType
     
@@ -20,7 +20,7 @@ final class ActivityViewModel: ActivityViewModelType {
     }
     
     deinit {
-        print("\(ActivityViewModel.self) deinitialized")
+        print("\(CarViewModel.self) deinitialized")
     }
     
     func logout(completion: @escaping (Result<Void, AuthorizationError>) -> Void) {

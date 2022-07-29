@@ -16,12 +16,12 @@ final class ViewFactory {
         return LoginViewController(viewModel: makeLoginViewModel(authorizationService: authorizationService))
     }
     
-    func makeActivityViewController(logoutService: LogoutServiceType) -> ActivityViewController {
-        return ActivityViewController(viewModel: makeActivityViewModel(logoutService: logoutService))
+    func makeCarViewController(logoutService: LogoutServiceType) -> CarViewController {
+        return CarViewController(viewModel: makeCarViewModel(logoutService: logoutService))
     }
     
-    func makeActivityModifyViewcontroller() -> ModifyActivityViewController {
-        return ModifyActivityViewController(viewModel: makeModifyActivityViewModel())
+    func makeKilometrageCorrectorViewcontroller() -> KilometrageCorrectorViewController {
+        return KilometrageCorrectorViewController(viewModel: makeKilometrageCorrectorViewModel())
     }
 }
 
@@ -34,11 +34,11 @@ private extension ViewFactory {
         .init(authorizationService: authorizationService)
     }
     
-    func makeActivityViewModel(logoutService: LogoutServiceType) -> ActivityViewModel {
+    func makeCarViewModel(logoutService: LogoutServiceType) -> CarViewModel {
         .init(logoutService: logoutService)
     }
     
-    func makeModifyActivityViewModel() -> ModifyActivityViewModel {
+    func makeKilometrageCorrectorViewModel() -> KilometrageCorrectorViewModel {
         .init()
     }
 }
