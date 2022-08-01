@@ -21,8 +21,8 @@ final class ViewFactory {
         return CarViewController(viewModel: viewModel)
     }
     
-    func makeKilometrageCorrectorViewcontroller() -> KilometrageCorrectorViewController {
-        return KilometrageCorrectorViewController(viewModel: makeKilometrageCorrectorViewModel())
+    func makeKilometrageCorrectorViewcontroller(car: Car) -> KilometrageCorrectorViewController {
+        return KilometrageCorrectorViewController(viewModel: makeKilometrageCorrectorViewModel(car: car))
     }
 }
 
@@ -39,7 +39,7 @@ private extension ViewFactory {
         .init(logoutService: logoutService, mediator: mediator)
     }
     
-    func makeKilometrageCorrectorViewModel() -> KilometrageCorrectorViewModel {
-        .init()
+    func makeKilometrageCorrectorViewModel(car: Car) -> KilometrageCorrectorViewModel {
+        .init(car: car)
     }
 }

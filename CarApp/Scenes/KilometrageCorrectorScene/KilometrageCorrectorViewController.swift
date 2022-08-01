@@ -9,6 +9,61 @@ import UIKit
 
 final class KilometrageCorrectorViewController: UIViewController {
     
+    private lazy var carDataStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            modelLabel,
+            doorsLabel,
+            kilometrageLabel,
+            vinLabel,
+        ])
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let modelLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Model"
+        label.font = .preferredFont(forTextStyle: .title1)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let doorsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "5"
+        label.font = .preferredFont(forTextStyle: .headline)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let kilometrageLabel: UILabel = {
+        let label = UILabel()
+        label.text = "144555"
+        label.font = .preferredFont(forTextStyle: .headline)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let vinLabel: UILabel = {
+        let label = UILabel()
+        label.text = "GHY6-ZX21-B6U8-RFX2"
+        label.font = .preferredFont(forTextStyle: .headline)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let stepper: UIStepper = {
+        let stepper = UIStepper()
+        stepper.minimumValue = 0
+        stepper.maximumValue = 9999999999
+        stepper.stepValue = 1
+        stepper.addTarget(self, action: #selector(stepperValueChanged), for: .touchUpInside)
+        stepper.translatesAutoresizingMaskIntoConstraints = false
+        return stepper
+    }()
+    
     private let viewModel: KilometrageCorrectorViewModelType
     
     init(viewModel: KilometrageCorrectorViewModelType) {
@@ -23,11 +78,59 @@ final class KilometrageCorrectorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setupUI()
+        bind()
+        viewModel.viewDidLoad() { [weak self] value in
+            self?.stepper.value = Double(value)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
     }
+    
+    @objc private func stepperValueChanged(_ sender: UIStepper) {
+        viewModel.changeKilometrage(to: Int(sender.value))
+    }
+    
+    private func bind() {
+        viewModel.didCarUpdate = { [weak self] car in
+            self?.configure(with: car)
+        }
+    }
+    
+    private func configure(with car: Car) {
+        modelLabel.text = car.model
+        doorsLabel.text = String(car.doors)
+        kilometrageLabel.text = String(car.kilometrage)
+        vinLabel.text = car.vin
+    }
+}
 
+private extension KilometrageCorrectorViewController {
+    func setupUI() {
+        constructHierarchy()
+        activateConstraints()
+    }
+    
+    func constructHierarchy() {
+        view.addSubview(carDataStackView)
+        view.addSubview(stepper)
+    }
+    
+    func activateConstraints() {
+        NSLayoutConstraint.activate([
+            carDataStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            carDataStackView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 16),
+            carDataStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            carDataStackView.bottomAnchor.constraint(lessThanOrEqualTo: view.centerYAnchor, constant: -16),
+        ])
+        
+        NSLayoutConstraint.activate([
+            stepper.topAnchor.constraint(equalTo: carDataStackView.bottomAnchor, constant: 16),
+            stepper.centerXAnchor.constraint(equalTo: carDataStackView.centerXAnchor),
+            
+        ])
+    }
 }

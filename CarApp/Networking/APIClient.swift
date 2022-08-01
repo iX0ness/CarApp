@@ -40,7 +40,7 @@ enum APIClient {
             } catch {
                 completion(.failure(.decodingFailure))
             }
-        }
+        }.resume()
     }
     
 }
