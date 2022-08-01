@@ -12,4 +12,5 @@ struct Car: Decodable {
     let model: String
     var doors: Int
     var kilometrage: Int
+    var vin: String
 }
