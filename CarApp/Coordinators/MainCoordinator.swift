@@ -31,7 +31,10 @@ final class MainCoordinator: Coordinable {
     }
     
     func start() {
-        let viewController = viewFactory.makeCarViewController(logoutService: logoutService)
+        let viewController = viewFactory.makeCarViewController(
+            logoutService: logoutService,
+            mediator: Mediator.shared
+        )
         viewController.coordinator = self
         push(viewController, animated: true)
     }

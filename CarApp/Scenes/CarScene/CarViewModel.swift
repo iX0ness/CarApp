@@ -14,9 +14,12 @@ protocol CarViewModelType: AnyObject {
 final class CarViewModel: CarViewModelType {
     
     private let logoutService: LogoutServiceType
+    private var mediator: CarViewModelMediatorType
     
-    init(logoutService: LogoutServiceType) {
+    init(logoutService: LogoutServiceType, mediator: CarViewModelMediatorType) {
         self.logoutService = logoutService
+        self.mediator = mediator
+        self.mediator.carViewModel = self
     }
     
     deinit {
@@ -25,6 +28,11 @@ final class CarViewModel: CarViewModelType {
     
     func logout(completion: @escaping (Result<Void, AuthorizationError>) -> Void) {
         logoutService.logout(completion: completion)
+    }
+    
+    func foo() {
+        //mediator.updateKilometrage(to: <#T##Int#>)
+        
     }
     
 }

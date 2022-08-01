@@ -16,8 +16,9 @@ final class ViewFactory {
         return LoginViewController(viewModel: makeLoginViewModel(authorizationService: authorizationService))
     }
     
-    func makeCarViewController(logoutService: LogoutServiceType) -> CarViewController {
-        return CarViewController(viewModel: makeCarViewModel(logoutService: logoutService))
+    func makeCarViewController(logoutService: LogoutServiceType, mediator: CarViewModelMediatorType) -> CarViewController {
+        let viewModel = makeCarViewModel(logoutService: logoutService, mediator: mediator)
+        return CarViewController(viewModel: viewModel)
     }
     
     func makeKilometrageCorrectorViewcontroller() -> KilometrageCorrectorViewController {
@@ -34,8 +35,8 @@ private extension ViewFactory {
         .init(authorizationService: authorizationService)
     }
     
-    func makeCarViewModel(logoutService: LogoutServiceType) -> CarViewModel {
-        .init(logoutService: logoutService)
+    func makeCarViewModel(logoutService: LogoutServiceType, mediator: CarViewModelMediatorType) -> CarViewModel {
+        .init(logoutService: logoutService, mediator: mediator)
     }
     
     func makeKilometrageCorrectorViewModel() -> KilometrageCorrectorViewModel {

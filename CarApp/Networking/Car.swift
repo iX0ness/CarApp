@@ -9,6 +9,7 @@ import Foundation
 
 struct Car: Decodable {
     let id: Int
+    var vin: String
     let model: String
     var doors: Int
     var kilometrage: Int

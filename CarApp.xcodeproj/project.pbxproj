@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		22B0333728948313001CB7B5 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B0333628948313001CB7B5 /* APIClient.swift */; };
 		22B0333928948351001CB7B5 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B0333828948351001CB7B5 /* Car.swift */; };
+		22B0333C28948721001CB7B5 /* Mediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B0333B28948721001CB7B5 /* Mediator.swift */; };
 		22BA340C2879A7F80091B43C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA340B2879A7F80091B43C /* AppDelegate.swift */; };
 		22BA340E2879A7F80091B43C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA340D2879A7F80091B43C /* SceneDelegate.swift */; };
 		22BA34102879A7F80091B43C /* LoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA340F2879A7F80091B43C /* LoaderViewController.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		22B0333628948313001CB7B5 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		22B0333828948351001CB7B5 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		22B0333B28948721001CB7B5 /* Mediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mediator.swift; sourceTree = "<group>"; };
 		22BA34082879A7F80091B43C /* CarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BA340B2879A7F80091B43C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22BA340D2879A7F80091B43C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,14 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		22B0333A28948716001CB7B5 /* Mediator */ = {
+			isa = PBXGroup;
+			children = (
+				22B0333B28948721001CB7B5 /* Mediator.swift */,
+			);
+			path = Mediator;
+			sourceTree = "<group>";
+		};
 		22BA33FF2879A7F80091B43C = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +115,7 @@
 		22BA340A2879A7F80091B43C /* CarApp */ = {
 			isa = PBXGroup;
 			children = (
+				22B0333A28948716001CB7B5 /* Mediator */,
 				22B0333528948301001CB7B5 /* Networking */,
 				96DE23EA2894007E0026458C /* Services */,
 				22C64BCC28905BDE004B48E6 /* Scenes */,
@@ -296,6 +307,7 @@
 				96DE23DD2893D8820026458C /* LoaderViewModel.swift in Sources */,
 				22BA342E2879B9380091B43C /* Router.swift in Sources */,
 				22B0333728948313001CB7B5 /* APIClient.swift in Sources */,
+				22B0333C28948721001CB7B5 /* Mediator.swift in Sources */,
 				22BA34302879BA740091B43C /* Coordinable.swift in Sources */,
 				22BA34102879A7F80091B43C /* LoaderViewController.swift in Sources */,
 				22E51FE02883316E00EC40E8 /* ViewFactory.swift in Sources */,
