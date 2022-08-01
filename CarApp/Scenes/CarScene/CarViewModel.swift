@@ -27,7 +27,6 @@ final class CarViewModel: CarViewModelType {
     
     init(logoutService: LogoutServiceType) {
         self.logoutService = logoutService
-        didChangeState?(.loading)
     }
     
     deinit {
@@ -41,7 +40,6 @@ final class CarViewModel: CarViewModelType {
     func fetchCar() {
         didChangeState?(.loading)
         
-
         APIClient.fetchCar { [weak self] result in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 switch result {
