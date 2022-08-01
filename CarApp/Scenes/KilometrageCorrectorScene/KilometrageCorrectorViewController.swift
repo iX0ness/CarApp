@@ -79,6 +79,10 @@ final class KilometrageCorrectorViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUI()
+        bind()
+        viewModel.viewDidLoad() { [weak self] value in
+            self?.stepper.value = Double(value)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,7 +91,20 @@ final class KilometrageCorrectorViewController: UIViewController {
     }
     
     @objc private func stepperValueChanged(_ sender: UIStepper) {
-        print("Stepper value: \(sender.value)")
+        viewModel.changeKilometrage(to: Int(sender.value))
+    }
+    
+    private func bind() {
+        viewModel.didCarUpdate = { [weak self] car in
+            self?.configure(with: car)
+        }
+    }
+    
+    private func configure(with car: Car) {
+        modelLabel.text = car.model
+        doorsLabel.text = String(car.doors)
+        kilometrageLabel.text = String(car.kilometrage)
+        vinLabel.text = car.vin
     }
 }
 

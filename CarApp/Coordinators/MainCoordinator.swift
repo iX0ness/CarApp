@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CarViewDelegate: AnyObject {
-    func showKilometrageCorrectorView()
+    func showKilometrageCorrectorView(for car: Car)
     func logout()
 }
 
@@ -39,8 +39,8 @@ final class MainCoordinator: Coordinable {
 }
 
 extension MainCoordinator: CarViewDelegate {
-    func showKilometrageCorrectorView() {
-        let viewController = viewFactory.makeKilometrageCorrectorViewcontroller()
+    func showKilometrageCorrectorView(for car: Car) {
+        let viewController = viewFactory.makeKilometrageCorrectorViewcontroller(car: car)
         push(viewController, animated: true)
     }
     
