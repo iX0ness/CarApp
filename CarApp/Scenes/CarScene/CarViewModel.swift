@@ -15,26 +15,31 @@ enum CarViewState {
 
 protocol CarViewModelType: AnyObject {
     var didChangeState: ((CarViewState) -> Void)? { get set }
-    var car: Car? { get }
     
     func logout(completion: @escaping (Result<Void, AuthorizationError>) -> Void)
     func fetchCar()
+    func fetchedCar() -> Car?
 }
 
 final class CarViewModel: CarViewModelType {
     
     var didChangeState: ((CarViewState) -> Void)?
     
-    var car: Car? {
-        if case let .loaded(car) = state {
-            return car
-        }
-        
-        return nil
+    private let logoutService: LogoutServiceType
+    
+    private var state: CarViewState = .loading {
+        didSet { didChangeState?(state) }
     }
     
-    private let logoutService: LogoutServiceType
-    private var state: CarViewState = .loading
+    private var car: Car? {
+        didSet {
+            if let car = car {
+                state = .loaded(car)
+            } else {
+                state = .failed
+            }
+        }
+    }
     
     init(logoutService: LogoutServiceType) {
         self.logoutService = logoutService
@@ -56,15 +61,21 @@ final class CarViewModel: CarViewModelType {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 switch result {
                     case .success(let car):
-                        self?.state = .loaded(car)
-                        self?.didChangeState?(.loaded(car))
+                        self?.car = car
                     case.failure(let error):
                         print(error)
-                        self?.state = .failed
-                        self?.didChangeState?(.failed)
+                        self?.car = nil
                 }
             }
         }
     }
     
+    func fetchedCar() -> Car? {
+        if case let .loaded(car) = state {
+            return car
+        }
+        
+        return nil
+    }
+
 }
