@@ -12,6 +12,10 @@ protocol CarViewDelegate: AnyObject {
     func logout()
 }
 
+protocol KilometrageCorrectorViewControllerDelegate: AnyObject {
+    func showVinCorrectorView(for car: Car)
+}
+
 final class MainCoordinator: Coordinable {
     
     weak var parent: AppCoordinator?
@@ -43,12 +47,20 @@ final class MainCoordinator: Coordinable {
 
 extension MainCoordinator: CarViewDelegate {
     func showKilometrageCorrectorView(for car: Car) {
-        let viewController = viewFactory.makeKilometrageCorrectorViewcontroller(car: car)
+        let viewController = viewFactory.makeKilometrageCorrectorViewController(car: car)
+        viewController.coordinator = self
         push(viewController, animated: true)
     }
     
     func logout() {
         didFinish?()
         presenter?.popToRootViewController(animated: false)
+    }
+}
+
+extension MainCoordinator: KilometrageCorrectorViewControllerDelegate {
+    func showVinCorrectorView(for car: Car) {
+        let viewController = viewFactory.makeVinCorrectorViewController(car: car)
+        push(viewController, animated: true)
     }
 }

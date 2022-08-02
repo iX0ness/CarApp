@@ -1,15 +1,13 @@
 //
-//  KilometrageCorrectorViewController.swift
+//  VinCorrectorViewController.swift
 //  CarApp
 //
-//  Created by Mykhaylo Levchuk on 29/07/2022.
+//  Created by Mykhaylo Levchuk on 01/08/2022.
 //
 
 import UIKit
 
-final class KilometrageCorrectorViewController: UIViewController {
-    
-    weak var coordinator: KilometrageCorrectorViewControllerDelegate?
+final class VinCorrectorViewController: UIViewController {
     
     private lazy var carDataStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
@@ -56,28 +54,21 @@ final class KilometrageCorrectorViewController: UIViewController {
         return label
     }()
     
-    private let stepper: UIStepper = {
-        let stepper = UIStepper()
-        stepper.minimumValue = 0
-        stepper.maximumValue = 9999999999
-        stepper.stepValue = 1
-        stepper.addTarget(self, action: #selector(stepperValueChanged), for: .touchUpInside)
-        stepper.translatesAutoresizingMaskIntoConstraints = false
-        return stepper
+    private let vinTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "VIN"
+        textField.borderStyle = .roundedRect
+        textField.layer.borderWidth = 1.0
+        textField.layer.cornerRadius = 10
+        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.addDoneButtonOnKeyboard()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
     }()
     
-    private let vinCorrectorViewButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Vin Corrector View", for: .normal)
-        button.addTarget(self, action: #selector(openVinCorrectorView), for: .touchUpInside)
-        button.backgroundColor = .lightGray
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    private let viewModel: VinCorrectorViewModelType
     
-    private let viewModel: KilometrageCorrectorViewModelType
-    
-    init(viewModel: KilometrageCorrectorViewModelType) {
+    init(viewModel: VinCorrectorViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -91,22 +82,15 @@ final class KilometrageCorrectorViewController: UIViewController {
         view.backgroundColor = .white
         setupUI()
         bind()
-        viewModel.viewDidLoad() { [weak self] value in
-            self?.stepper.value = Double(value)
+        viewModel.viewDidLoad() { [weak self] vin in
+            self?.vinTextField.text = vin
         }
+        vinTextField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
-    }
-    
-    @objc private func stepperValueChanged(_ sender: UIStepper) {
-        viewModel.changeKilometrage(to: Int(sender.value))
-    }
-    
-    @objc private func openVinCorrectorView() {
-        coordinator?.showVinCorrectorView(for: viewModel.car)
     }
     
     private func bind() {
@@ -121,9 +105,10 @@ final class KilometrageCorrectorViewController: UIViewController {
         kilometrageLabel.text = String(car.kilometrage)
         vinLabel.text = car.vin
     }
+    
 }
 
-private extension KilometrageCorrectorViewController {
+private extension VinCorrectorViewController {
     func setupUI() {
         constructHierarchy()
         activateConstraints()
@@ -131,8 +116,7 @@ private extension KilometrageCorrectorViewController {
     
     func constructHierarchy() {
         view.addSubview(carDataStackView)
-        view.addSubview(stepper)
-        view.addSubview(vinCorrectorViewButton)
+        view.addSubview(vinTextField)
     }
     
     func activateConstraints() {
@@ -144,16 +128,18 @@ private extension KilometrageCorrectorViewController {
         ])
         
         NSLayoutConstraint.activate([
-            stepper.topAnchor.constraint(equalTo: carDataStackView.bottomAnchor, constant: 16),
-            stepper.centerXAnchor.constraint(equalTo: carDataStackView.centerXAnchor),
-            
+            vinTextField.topAnchor.constraint(equalTo: carDataStackView.bottomAnchor, constant: 16),
+            vinTextField.centerXAnchor.constraint(equalTo: carDataStackView.centerXAnchor),
+            vinTextField.widthAnchor.constraint(equalTo: carDataStackView.widthAnchor, multiplier: 0.8),
         ])
-        
-        NSLayoutConstraint.activate([
-            vinCorrectorViewButton.widthAnchor.constraint(equalTo: view.widthAnchor,multiplier: 0.8),
-            vinCorrectorViewButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
-            vinCorrectorViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            vinCorrectorViewButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -16),
-        ])
+    }
+}
+
+
+extension VinCorrectorViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        viewModel.set(vin: textField.text) { vin in
+            vinTextField.text = vin
+        }
     }
 }
