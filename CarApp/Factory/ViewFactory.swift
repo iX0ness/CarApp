@@ -21,13 +21,14 @@ final class ViewFactory {
         return CarViewController(viewModel: viewModel)
     }
     
-    func makeKilometrageCorrectorViewController(car: Car, mediator: KilometragecorrectorViewModelMediatorType) -> KilometrageCorrectorViewController {
+    func makeKilometrageCorrectorViewController(car: Car, mediator: KilometrageCorrectorViewModelMediatorType) -> KilometrageCorrectorViewController {
         let viewModel = makeKilometrageCorrectorViewModel(car: car, mediator: mediator)
         return KilometrageCorrectorViewController(viewModel: viewModel)
     }
     
-    func makeVinCorrectorViewController(car: Car) -> VinCorrectorViewController {
-        return VinCorrectorViewController(viewModel: makeVinCorrectorViewModel(car: car))
+    func makeVinCorrectorViewController(car: Car, mediator: VinCorrectorMediatorType) -> VinCorrectorViewController {
+        let viewModel = makeVinCorrectorViewModel(car: car, mediator: mediator)
+        return VinCorrectorViewController(viewModel: viewModel)
     }
 }
 
@@ -44,11 +45,11 @@ private extension ViewFactory {
         .init(logoutService: logoutService, mediator: mediator)
     }
     
-    func makeKilometrageCorrectorViewModel(car: Car, mediator: KilometragecorrectorViewModelMediatorType) -> KilometrageCorrectorViewModel {
+    func makeKilometrageCorrectorViewModel(car: Car, mediator: KilometrageCorrectorViewModelMediatorType) -> KilometrageCorrectorViewModel {
         .init(car: car, mediator: mediator)
     }
     
-    func makeVinCorrectorViewModel(car: Car) -> VinCorrectorViewModel {
-        .init(car: car)
+    func makeVinCorrectorViewModel(car: Car,  mediator: VinCorrectorMediatorType) -> VinCorrectorViewModel {
+        .init(car: car, mediator: mediator)
     }
 }

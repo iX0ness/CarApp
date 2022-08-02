@@ -63,7 +63,10 @@ extension MainCoordinator: CarViewDelegate {
 
 extension MainCoordinator: KilometrageCorrectorViewControllerDelegate {
     func showVinCorrectorView(for car: Car) {
-        let viewController = viewFactory.makeVinCorrectorViewController(car: car)
+        let viewController = viewFactory.makeVinCorrectorViewController(
+            car: car,
+            mediator: Mediator.shared
+        )
         push(viewController, animated: true)
     }
 }

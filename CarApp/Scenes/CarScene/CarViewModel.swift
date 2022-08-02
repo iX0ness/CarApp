@@ -86,6 +86,10 @@ final class CarViewModel: CarViewModelType {
         mediator.didKilometrageUpdate = { [weak self] value in
             self?.car?.kilometrage = value
         }
+        
+        mediator.didVinUpdate = { [weak self] vin in
+            self?.car?.vin = vin
+        }
     }
     
 }

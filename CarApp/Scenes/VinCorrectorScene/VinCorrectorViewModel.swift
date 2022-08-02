@@ -16,6 +16,8 @@ protocol VinCorrectorViewModelType: AnyObject {
 
 final class VinCorrectorViewModel: VinCorrectorViewModelType {
     var didCarUpdate: ((Car) -> Void)?
+    
+    private let mediator: VinCorrectorMediatorType
     private var car: Car {
         
         didSet {
@@ -23,8 +25,10 @@ final class VinCorrectorViewModel: VinCorrectorViewModelType {
         }
     }
     
-    init(car: Car) {
+    init(car: Car, mediator: VinCorrectorMediatorType) {
         self.car = car
+        self.mediator = mediator
+        self.mediator.vinCorrectorViewModel = self
     }
     
     func viewDidLoad(completion: (String) -> Void) {
@@ -36,7 +40,9 @@ final class VinCorrectorViewModel: VinCorrectorViewModelType {
         vin.map { [weak self] vin in
             let trimmed = vin.trimmingCharacters(in: .whitespaces)
             self?.car.vin = trimmed
+            self?.mediator.updateVin(trimmed)
             completion(trimmed)
         }
     }
+    
 }
