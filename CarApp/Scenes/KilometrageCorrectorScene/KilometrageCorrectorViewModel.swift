@@ -9,6 +9,7 @@ import Foundation
 
 protocol KilometrageCorrectorViewModelType: AnyObject {
     var didCarUpdate: ((Car) -> Void)? { get set }
+    var car: Car { get }
     
     func viewDidLoad(completion: (Int) -> Void)
     func changeKilometrage(to value: Int)
@@ -17,11 +18,8 @@ protocol KilometrageCorrectorViewModelType: AnyObject {
 final class KilometrageCorrectorViewModel: KilometrageCorrectorViewModelType {
     
     var didCarUpdate: ((Car) -> Void)?
-    private var car: Car {
-        
-        didSet {
-            didCarUpdate?(car)
-        }
+    var car: Car {
+        didSet { didCarUpdate?(car) }
     }
     
     init(car: Car) {
