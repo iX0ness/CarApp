@@ -47,7 +47,10 @@ final class MainCoordinator: Coordinable {
 
 extension MainCoordinator: CarViewDelegate {
     func showKilometrageCorrectorView(for car: Car) {
-        let viewController = viewFactory.makeKilometrageCorrectorViewController(car: car)
+        let viewController = viewFactory.makeKilometrageCorrectorViewController(
+            car: car,
+            mediator: Mediator.shared
+        )
         viewController.coordinator = self
         push(viewController, animated: true)
     }

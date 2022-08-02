@@ -10,26 +10,35 @@ import Foundation
 
 protocol CarViewModelMediatorType: AnyObject {
     var carViewModel: CarViewModel! { get set }
-    func updateVin(_ value: String)
+    var didKilometrageUpdate: ((Int) -> Void)? { get set }
 }
 
 protocol KilometragecorrectorViewModelMediatorType: AnyObject {
     var kilometrageCorrectorViewModel: KilometrageCorrectorViewModel! { get set }
     func updateKilometrage(to value: Int)
 }
+
+protocol VinCorrectorMediatorType: AnyObject {
+    var vinCorrectorViewModel: VinCorrectorViewModelType! { get set }
+    func updateVin(_ value: String)
+}
+
 protocol MediatorType {
-    static var shared: CarViewModelMediatorType & KilometragecorrectorViewModelMediatorType { get }
+    static var shared: CarViewModelMediatorType & KilometragecorrectorViewModelMediatorType & VinCorrectorMediatorType { get }
 }
 
 final class Mediator: MediatorType {
-    static var shared: CarViewModelMediatorType & KilometragecorrectorViewModelMediatorType = Mediator()
+    static var shared: CarViewModelMediatorType & KilometragecorrectorViewModelMediatorType & VinCorrectorMediatorType = Mediator()
     
     unowned var carViewModel: CarViewModel!
     unowned var kilometrageCorrectorViewModel: KilometrageCorrectorViewModel!
+    unowned var vinCorrectorViewModel: VinCorrectorViewModelType!
+    
+    var didKilometrageUpdate: ((Int) -> Void)?
 }
 
 
-extension Mediator: CarViewModelMediatorType {
+extension Mediator: VinCorrectorMediatorType {
     func updateVin(_ value: String) {
         
     }
@@ -37,6 +46,8 @@ extension Mediator: CarViewModelMediatorType {
 
 extension Mediator: KilometragecorrectorViewModelMediatorType {
     func updateKilometrage(to value: Int) {
-        
+        didKilometrageUpdate?(value)
     }
 }
+
+extension Mediator: CarViewModelMediatorType {}

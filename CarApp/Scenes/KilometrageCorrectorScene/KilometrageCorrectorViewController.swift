@@ -86,6 +86,10 @@ final class KilometrageCorrectorViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        print("\(KilometrageCorrectorViewController.self) deinitialized")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

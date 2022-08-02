@@ -125,7 +125,7 @@ final class CarViewController: UIViewController {
     }
     
     @objc private func openKilometrageCorrectorView() {
-        guard let car = viewModel.car else { return }
+        guard let car = viewModel.fetchedCar() else { return }
         self.coordinator?.showKilometrageCorrectorView(for: car)
     }
     

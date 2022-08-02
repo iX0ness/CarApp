@@ -21,9 +21,16 @@ final class KilometrageCorrectorViewModel: KilometrageCorrectorViewModelType {
     var car: Car {
         didSet { didCarUpdate?(car) }
     }
+    private var mediator: KilometragecorrectorViewModelMediatorType
     
-    init(car: Car) {
+    init(car: Car, mediator: KilometragecorrectorViewModelMediatorType) {
         self.car = car
+        self.mediator = mediator
+        self.mediator.kilometrageCorrectorViewModel = self
+    }
+    
+    deinit {
+        print("\(KilometrageCorrectorViewModel.self) deinitialized")
     }
     
     func viewDidLoad(completion: (Int) -> Void) {
@@ -33,5 +40,6 @@ final class KilometrageCorrectorViewModel: KilometrageCorrectorViewModelType {
     
     func changeKilometrage(to value: Int) {
         car.kilometrage = value
+        mediator.updateKilometrage(to: value)
     }
 }
