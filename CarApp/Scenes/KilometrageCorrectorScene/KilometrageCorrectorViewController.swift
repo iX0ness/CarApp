@@ -125,6 +125,7 @@ final class KilometrageCorrectorViewController: UIViewController {
         kilometrageLabel.text = String(car.kilometrage)
         vinLabel.text = car.vin
     }
+    
 }
 
 private extension KilometrageCorrectorViewController {

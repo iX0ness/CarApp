@@ -15,11 +15,11 @@ protocol VinCorrectorViewModelType: AnyObject {
 }
 
 final class VinCorrectorViewModel: VinCorrectorViewModelType {
+    
     var didCarUpdate: ((Car) -> Void)?
     
     private let mediator: VinCorrectorMediatorType
     private var car: Car {
-        
         didSet {
             didCarUpdate?(car)
         }
@@ -28,7 +28,10 @@ final class VinCorrectorViewModel: VinCorrectorViewModelType {
     init(car: Car, mediator: VinCorrectorMediatorType) {
         self.car = car
         self.mediator = mediator
-        self.mediator.vinCorrectorViewModel = self
+    }
+    
+    deinit {
+        print("\(VinCorrectorViewModel.self) deinitialized")
     }
     
     func viewDidLoad(completion: (String) -> Void) {

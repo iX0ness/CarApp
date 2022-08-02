@@ -9,50 +9,43 @@ import Foundation
 
 
 protocol CarViewModelMediatorType: AnyObject {
-    var carViewModel: CarViewModel! { get set }
+    var carViewModel: CarViewModelMediatorInputType? { get set }
 }
 
 protocol KilometrageCorrectorViewModelMediatorType: AnyObject {
-    var kilometrageCorrectorViewModel: KilometrageCorrectorViewModel! { get set }
+    var kilometrageCorrectorViewModel: KilometrageCorrectorViewModelMediatorInputType? { get set }
     func updateKilometrage(to value: Int)
 }
 
-protocol KilometrageCorrectorMediatorDelegate: AnyObject {
-    func didKilometrageUpdate(_ value: Int)
-}
-
 protocol VinCorrectorMediatorType: AnyObject {
-    var vinCorrectorViewModel: VinCorrectorViewModelType! { get set }
+    var vinCorrectorViewModel: VinCorrectorViewModel? { get set }
     func updateVin(_ value: String)
 }
 
-
-
 protocol MediatorType {
-    static var shared: CarViewModelMediatorType & KilometragecorrectorViewModelMediatorType & VinCorrectorMediatorType { get }
+    static var shared: CarViewModelMediatorType & KilometrageCorrectorViewModelMediatorType & VinCorrectorMediatorType { get }
 }
 
 final class Mediator: MediatorType {
     static var shared: CarViewModelMediatorType & KilometrageCorrectorViewModelMediatorType & VinCorrectorMediatorType = Mediator()
     
-    unowned var carViewModel: CarViewModel!
-    unowned var kilometrageCorrectorViewModel: KilometrageCorrectorViewModel!
-    unowned var vinCorrectorViewModel: VinCorrectorViewModelType!
-    
-    var didKilometrageUpdate: ((Int) -> Void)?
-    var didVinUpdate: ((String) -> Void)?
+    weak var carViewModel: CarViewModelMediatorInputType?
+    weak var kilometrageCorrectorViewModel: KilometrageCorrectorViewModelMediatorInputType?
+    weak var vinCorrectorViewModel: VinCorrectorViewModel?
+
 }
 
 
 extension Mediator: VinCorrectorMediatorType {
     func updateVin(_ value: String) {
-        didVinUpdate?(value)
+        carViewModel?.update(vin: value)
+        kilometrageCorrectorViewModel?.update(vin: value)
     }
 }
 
 extension Mediator: KilometrageCorrectorViewModelMediatorType {
     func updateKilometrage(to value: Int) {
-        didKilometrageUpdate?(value)
+        carViewModel?.update(kilometrage: value)
     }
 }
 

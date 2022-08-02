@@ -18,16 +18,22 @@ final class ViewFactory {
     
     func makeCarViewController(logoutService: LogoutServiceType, mediator: CarViewModelMediatorType) -> CarViewController {
         let viewModel = makeCarViewModel(logoutService: logoutService, mediator: mediator)
+        mediator.carViewModel = viewModel
+        
         return CarViewController(viewModel: viewModel)
     }
     
     func makeKilometrageCorrectorViewController(car: Car, mediator: KilometrageCorrectorViewModelMediatorType) -> KilometrageCorrectorViewController {
         let viewModel = makeKilometrageCorrectorViewModel(car: car, mediator: mediator)
+        mediator.kilometrageCorrectorViewModel = viewModel
+        
         return KilometrageCorrectorViewController(viewModel: viewModel)
     }
     
     func makeVinCorrectorViewController(car: Car, mediator: VinCorrectorMediatorType) -> VinCorrectorViewController {
         let viewModel = makeVinCorrectorViewModel(car: car, mediator: mediator)
+        mediator.vinCorrectorViewModel = viewModel
+        
         return VinCorrectorViewController(viewModel: viewModel)
     }
 }

@@ -77,6 +77,10 @@ final class VinCorrectorViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        print("\(VinCorrectorViewController.self) deinitialized")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

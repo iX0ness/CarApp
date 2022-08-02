@@ -15,6 +15,10 @@ protocol KilometrageCorrectorViewModelType: AnyObject {
     func changeKilometrage(to value: Int)
 }
 
+protocol KilometrageCorrectorViewModelMediatorInputType: AnyObject {
+    func update(vin: String)
+}
+
 final class KilometrageCorrectorViewModel: KilometrageCorrectorViewModelType {
     
     var didCarUpdate: ((Car) -> Void)?
@@ -26,8 +30,6 @@ final class KilometrageCorrectorViewModel: KilometrageCorrectorViewModelType {
     init(car: Car, mediator: KilometrageCorrectorViewModelMediatorType) {
         self.car = car
         self.mediator = mediator
-        self.mediator.kilometrageCorrectorViewModel = self
-        bind()
     }
     
     deinit {
@@ -44,9 +46,10 @@ final class KilometrageCorrectorViewModel: KilometrageCorrectorViewModelType {
         mediator.updateKilometrage(to: value)
     }
     
-    func bind() {
-        mediator.didVinUpdate = { [weak self] vin in
-            self?.car.vin = vin
-        }
+}
+
+extension KilometrageCorrectorViewModel: KilometrageCorrectorViewModelMediatorInputType {
+    func update(vin: String) {
+        car.vin = vin
     }
 }

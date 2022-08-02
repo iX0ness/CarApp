@@ -13,6 +13,11 @@ enum CarViewState {
     case failed
 }
 
+protocol CarViewModelMediatorInputType: AnyObject {
+    func update(vin: String)
+    func update(kilometrage: Int)
+}
+
 protocol CarViewModelType: AnyObject {
     var didChangeState: ((CarViewState) -> Void)? { get set }
     
@@ -45,8 +50,6 @@ final class CarViewModel: CarViewModelType {
     init(logoutService: LogoutServiceType, mediator: CarViewModelMediatorType) {
         self.logoutService = logoutService
         self.mediator = mediator
-        self.mediator.carViewModel = self
-        bind()
     }
     
     deinit {
@@ -81,15 +84,15 @@ final class CarViewModel: CarViewModelType {
         
         return nil
     }
-    
-    private func bind() {
-        mediator.didKilometrageUpdate = { [weak self] value in
-            self?.car?.kilometrage = value
-        }
-        
-        mediator.didVinUpdate = { [weak self] vin in
-            self?.car?.vin = vin
-        }
+
+}
+
+extension CarViewModel: CarViewModelMediatorInputType {
+    func update(vin: String) {
+        car?.vin = vin
     }
     
+    func update(kilometrage: Int) {
+        car?.kilometrage = kilometrage
+    }
 }
